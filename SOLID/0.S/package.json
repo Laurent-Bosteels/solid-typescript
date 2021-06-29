@@ -1,0 +1,14 @@
+{
+  "name": "singleresponsibility",
+  "version": "1.0.0",
+  "description": "",
+  "main": "new.js",
+  "scripts": {
+    "dev": "parcel public/index.html",
+    "build": "parcel public/index.html"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.3.4"
+  }
+}
