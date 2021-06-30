@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^4.3.4"
+  },
+  "name": "1.o",
+  "description": "Classes should be open for extension, but closed for modification. In more simple words you can always add new code to an object, but you should never change the design of old code.",
+  "version": "1.0.0",
+  "main": "new.js",
+  "scripts": {
+    "dev": "parcel public/index.html",
+    "build": "parcel public/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
