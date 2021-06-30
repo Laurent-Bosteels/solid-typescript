@@ -117,9 +117,241 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"new.js":[function(require,module,exports) {
+})({"Zoo.js":[function(require,module,exports) {
 "use strict";
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Zoo = void 0;
+
+var Zoo = /*#__PURE__*/function () {
+  function Zoo() {
+    _classCallCheck(this, Zoo);
+
+    this._animals = new Array();
+  }
+
+  _createClass(Zoo, [{
+    key: "addAnimal",
+    value: function addAnimal(animal) {
+      this._animals.push(animal);
+    }
+  }, {
+    key: "animals",
+    get: function get() {
+      return this._animals;
+    }
+  }]);
+
+  return Zoo;
+}();
+
+exports.Zoo = Zoo;
+},{}],"Cat.js":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Cat = void 0;
+
+var Cat = /*#__PURE__*/function () {
+  function Cat() {
+    _classCallCheck(this, Cat);
+  }
+
+  _createClass(Cat, [{
+    key: "name",
+    get: function get() {
+      return this._name;
+    },
+    set: function set(value) {
+      this._name = value;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return 'cat';
+    }
+  }, {
+    key: "makeSound",
+    value: function makeSound() {
+      return 'Miauw';
+    }
+  }]);
+
+  return Cat;
+}();
+
+exports.Cat = Cat;
+},{}],"Dog.js":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Dog = void 0;
+
+var Dog = /*#__PURE__*/function () {
+  function Dog() {
+    _classCallCheck(this, Dog);
+  }
+
+  _createClass(Dog, [{
+    key: "name",
+    get: function get() {
+      return this._name;
+    },
+    set: function set(value) {
+      this._name = value;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return 'dog';
+    }
+  }, {
+    key: "makeSound",
+    value: function makeSound() {
+      return 'Woef';
+    }
+  }]);
+
+  return Dog;
+}();
+
+exports.Dog = Dog;
+},{}],"Parrot.js":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Parrot = void 0;
+
+var Parrot = /*#__PURE__*/function () {
+  function Parrot() {
+    _classCallCheck(this, Parrot);
+  }
+
+  _createClass(Parrot, [{
+    key: "name",
+    get: function get() {
+      return this._name;
+    },
+    set: function set(value) {
+      this._name = value;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return 'parrot';
+    }
+  }, {
+    key: "makeSound",
+    value: function makeSound() {
+      return 'Yarrr';
+    }
+  }]);
+
+  return Parrot;
+}();
+
+exports.Parrot = Parrot;
+},{}],"Cow.js":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Cow = void 0;
+
+var Cow = /*#__PURE__*/function () {
+  function Cow() {
+    _classCallCheck(this, Cow);
+  }
+
+  _createClass(Cow, [{
+    key: "name",
+    get: function get() {
+      return this._name;
+    },
+    set: function set(value) {
+      this._name = value;
+    }
+  }, {
+    key: "type",
+    get: function get() {
+      return 'cow';
+    }
+  }, {
+    key: "makeSound",
+    value: function makeSound() {
+      return 'MOO';
+    }
+  }]);
+
+  return Cow;
+}();
+
+exports.Cow = Cow;
+},{}],"new.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Zoo_1 = require("./Zoo");
+
+var Cat_1 = require("./Cat");
+
+var Dog_1 = require("./Dog");
+
+var Parrot_1 = require("./Parrot");
+
+var Cow_1 = require("./Cow");
+
+var zoo = new Zoo_1.Zoo();
+zoo.addAnimal(new Cat_1.Cat());
+zoo.addAnimal(new Dog_1.Dog());
+zoo.addAnimal(new Parrot_1.Parrot());
+zoo.addAnimal(new Cow_1.Cow());
+zoo.animals.forEach(function (animal) {
+  document.querySelector('#target').innerHTML += animal.type + ": " + animal.makeSound() + "<br>";
+});
+},{"./Zoo":"Zoo.js","./Cat":"Cat.js","./Dog":"Dog.js","./Parrot":"Parrot.js","./Cow":"Cow.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -147,7 +379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54276" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59825" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
