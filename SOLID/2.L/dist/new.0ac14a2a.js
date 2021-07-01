@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"new.js":[function(require,module,exports) {
+})({"ShoppingBasket.js":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -126,51 +126,48 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var Discount = /*#__PURE__*/function () {
-  function Discount(type) {
-    var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ShoppingBasket = void 0;
 
-    _classCallCheck(this, Discount);
+var ShoppingBasket = /*#__PURE__*/function () {
+  function ShoppingBasket() {
+    _classCallCheck(this, ShoppingBasket);
 
-    this._type = type;
-    this._value = value;
-
-    if (this._type != 'none' && value <= 0) {
-      throw new Error('You cannot create a ' + this._type + ' discount with a negative value');
-    }
+    //this array only accepts Product objects, nothing else
+    this._products = [];
   }
 
-  _createClass(Discount, [{
-    key: "apply",
-    value: function apply(price) {
-      //@todo: instead of using magic values as string in this, it would be a lot better to change them into constant. This would protect us from misspellings. Can you improve this?
-      if (this._type === "none") {
-        return price;
-      } else if (this._type === "variable") {
-        return price - price * this._value / 100;
-      } else if (this._type === "fixed") {
-        return Math.max(0, price - this._value);
-      } else {
-        throw new Error('Invalid type of discount');
-      }
+  _createClass(ShoppingBasket, [{
+    key: "products",
+    get: function get() {
+      return this._products;
     }
   }, {
-    key: "showCalculation",
-    value: function showCalculation(price) {
-      if (this._type === "none") {
-        return "No discount";
-      } else if (this._type === "variable") {
-        return price + " € -  " + this._value + "%";
-      } else if (this._type === "fixed") {
-        return price + "€ -  " + this._value + "€ (min 0 €)";
-      } else {
-        throw new Error('Invalid type of discount');
-      }
+    key: "addProduct",
+    value: function addProduct(product) {
+      this._products.push(product);
     }
   }]);
 
-  return Discount;
+  return ShoppingBasket;
 }();
+
+exports.ShoppingBasket = ShoppingBasket;
+},{}],"Product.js":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Product = void 0;
 
 var Product = /*#__PURE__*/function () {
   function Product(name, price, discount) {
@@ -213,34 +210,140 @@ var Product = /*#__PURE__*/function () {
   return Product;
 }();
 
-var shoppingBasket = /*#__PURE__*/function () {
-  function shoppingBasket() {
-    _classCallCheck(this, shoppingBasket);
+exports.Product = Product;
+},{}],"FixedDiscount.js":[function(require,module,exports) {
+"use strict";
 
-    //this array only accepts Product objects, nothing else
-    this._products = [];
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FixedDiscount = void 0;
+
+var FixedDiscount = /*#__PURE__*/function () {
+  function FixedDiscount(value) {
+    _classCallCheck(this, FixedDiscount);
+
+    this._value = value;
   }
 
-  _createClass(shoppingBasket, [{
-    key: "products",
-    get: function get() {
-      return this._products;
+  _createClass(FixedDiscount, [{
+    key: "apply",
+    value: function apply(price) {
+      return Math.max(0, price - this._value);
     }
   }, {
-    key: "addProduct",
-    value: function addProduct(product) {
-      this._products.push(product);
+    key: "showCalculation",
+    value: function showCalculation(price) {
+      return price + "€ -  " + this._value + "€ (min 0 €)";
     }
   }]);
 
-  return shoppingBasket;
+  return FixedDiscount;
 }();
 
-var cart = new shoppingBasket();
-cart.addProduct(new Product('Chair', 25, new Discount("fixed", 10))); //cart.addProduct(new Product('Chair', 25, new Discount("fixed", -10)));
+exports.FixedDiscount = FixedDiscount;
+},{}],"VariableDiscount.js":[function(require,module,exports) {
+"use strict";
 
-cart.addProduct(new Product('Table', 50, new Discount("variable", 25)));
-cart.addProduct(new Product('Bed', 100, new Discount("none")));
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.VariableDiscount = void 0;
+
+var VariableDiscount = /*#__PURE__*/function () {
+  function VariableDiscount(value) {
+    _classCallCheck(this, VariableDiscount);
+
+    this._value = value;
+  }
+
+  _createClass(VariableDiscount, [{
+    key: "apply",
+    value: function apply(price) {
+      return price - price * this._value / 100;
+    }
+  }, {
+    key: "showCalculation",
+    value: function showCalculation(price) {
+      return price + " € -  " + this._value + "%";
+    }
+  }]);
+
+  return VariableDiscount;
+}();
+
+exports.VariableDiscount = VariableDiscount;
+},{}],"NoDiscount.js":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NoDiscount = void 0;
+
+var NoDiscount = /*#__PURE__*/function () {
+  function NoDiscount() {
+    _classCallCheck(this, NoDiscount);
+
+    this._value = 0;
+  }
+
+  _createClass(NoDiscount, [{
+    key: "apply",
+    value: function apply(price) {
+      return price;
+    }
+  }, {
+    key: "showCalculation",
+    value: function showCalculation(price) {
+      return "No discount";
+    }
+  }]);
+
+  return NoDiscount;
+}();
+
+exports.NoDiscount = NoDiscount;
+},{}],"new.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var ShoppingBasket_1 = require("./ShoppingBasket");
+
+var Product_1 = require("./Product");
+
+var FixedDiscount_1 = require("./FixedDiscount");
+
+var VariableDiscount_1 = require("./VariableDiscount");
+
+var NoDiscount_1 = require("./NoDiscount");
+
+var cart = new ShoppingBasket_1.ShoppingBasket();
+cart.addProduct(new Product_1.Product('Chair', 25, new FixedDiscount_1.FixedDiscount(10))); //cart.addProduct(new Product('Chair', 25, new DiscountOld("fixed", -10)));
+
+cart.addProduct(new Product_1.Product('Table', 50, new VariableDiscount_1.VariableDiscount(25)));
+cart.addProduct(new Product_1.Product('Bed', 100, new NoDiscount_1.NoDiscount()));
 var tableElement = document.querySelector('#cart tbody');
 cart.products.forEach(function (product) {
   var tr = document.createElement('tr');
@@ -258,7 +361,7 @@ cart.products.forEach(function (product) {
   tr.appendChild(td);
   tableElement.appendChild(tr);
 });
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./ShoppingBasket":"ShoppingBasket.js","./Product":"Product.js","./FixedDiscount":"FixedDiscount.js","./VariableDiscount":"VariableDiscount.js","./NoDiscount":"NoDiscount.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -286,7 +389,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61400" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49873" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
